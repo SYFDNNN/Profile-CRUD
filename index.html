@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aplikasi Profil Web | My Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --cyber-dark: #1a1a2e;
+        --cyber-darker: #0f0f1a;
+        --cyber-neon-blue: #00f0ff;
+        --cyber-neon-pink: #ff00ff;
+        --cyber-neon-green: #39ff14;
+        --cyber-text-light: #ffffff; 
+        --cyber-text-medium: #c0c0c0; 
+        --cyber-border: #33334d;
+      }
+
+      body {
+        font-family: "Rajdhani", "Inter", sans-serif; 
+        background: linear-gradient(
+          135deg,
+          var(--cyber-darker) 0%,
+          var(--cyber-dark) 100%
+        ); 
+        line-height: 1.6;
+        color: var(--cyber-text-light); 
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start; 
+        align-items: center;
+        padding: 0; 
+        box-sizing: border-box;
+        position: relative; 
+        overflow-x: hidden; 
+      }
+
+      
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: repeating-linear-gradient(
+          0deg,
+          rgba(0, 0, 0, 0.1) 0px,
+          rgba(0, 0, 0, 0.1) 1px,
+          transparent 1px,
+          transparent 2px
+        );
+        pointer-events: none; 
+        z-index: 1000; 
+        opacity: 0.1; 
+      }
+
+      body::after {
+        content: "";
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        border-bottom: 2px solid var(--cyber-neon-blue);
+        border-right: 2px solid var(--cyber-neon-blue);
+        opacity: 0.3;
+        animation: pulse-border 2s infinite alternate;
+      }
+      @keyframes pulse-border {
+        from {
+          opacity: 0.3;
+          transform: scale(1);
+        }
+        to {
+          opacity: 0.6;
+          transform: scale(1.05);
+        }
+      }
+
+      .main-container {
+        max-width: 1200px;
+        width: 100%;
+        padding: 2rem;
+        margin-top: 2rem; 
+        z-index: 1; 
+      }
+
+      .card {
+        background-color: var(--cyber-dark);
+        border-radius: 0.75rem; 
+        box-shadow: 0 0 20px rgba(0, 240, 255, 0.2),
+          0 0 40px rgba(255, 0, 255, 0.1); 
+        border: 1px solid var(--cyber-border);
+        transition: transform 0.3s ease, box-shadow 0.3s ease,
+          border-color 0.3s ease;
+        position: relative; 
+      }
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0 30px rgba(0, 240, 255, 0.4),
+          0 0 60px rgba(255, 0, 255, 0.2);
+        border-color: var(--cyber-neon-blue); 
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: linear-gradient(
+          45deg,
+          var(--cyber-neon-blue),
+          var(--cyber-neon-pink)
+        );
+        border-radius: 0.75rem;
+        filter: blur(8px); 
+        opacity: 0;
+        z-index: -1;
+        transition: opacity 0.5s ease;
+      }
+      .card:hover::before {
+        opacity: 0.3; 
+      }
+
+      h1,
+      h2 {
+        color: var(--cyber-neon-blue); 
+        text-shadow: 0 0 8px rgba(0, 240, 255, 0.6),
+          0 0 15px rgba(0, 240, 255, 0.4); 
+        font-weight: 700;
+      }
+      h1 {
+        font-size: 3.8rem; 
+        margin-bottom: 2.5rem;
+        letter-spacing: 0.05em; 
+        animation: glitch-text 1.5s infinite alternate; 
+      }
+      h2 {
+        font-size: 2.8rem; 
+        margin-bottom: 1.8rem;
+        letter-spacing: 0.03em;
+      }
+
+      @keyframes glitch-text {
+        0% {
+          text-shadow: 0 0 8px rgba(0, 240, 255, 0.6);
+          transform: translateX(0);
+        }
+        20% {
+          text-shadow: 0 0 8px rgba(0, 240, 255, 0.6),
+            2px 0 0 rgba(255, 0, 255, 0.4);
+          transform: translateX(-2px);
+        }
+        40% {
+          text-shadow: 0 0 8px rgba(0, 240, 255, 0.6),
+            -2px 0 0 rgba(57, 255, 20, 0.4);
+          transform: translateX(2px);
+        }
+        60% {
+          text-shadow: 0 0 8px rgba(0, 240, 255, 0.6),
+            1px 0 0 rgba(0, 240, 255, 0.4);
+          transform: translateX(-1px);
+        }
+        80% {
+          text-shadow: 0 0 8px rgba(0, 240, 255, 0.6),
+            -1px 0 0 rgba(255, 0, 255, 0.4);
+          transform: translateX(1px);
+        }
+        100% {
+          text-shadow: 0 0 8px rgba(0, 240, 255, 0.6);
+          transform: translateX(0);
+        }
+      }
+
+      label {
+        font-weight: 600;
+        color: var(--cyber-text-medium); 
+        text-transform: uppercase;
+        font-size: 0.9rem;
+        letter-spacing: 0.05em;
+      }
+
+      input[type="text"],
+      textarea {
+        background-color: var(--cyber-darker);
+        border: 1px solid var(--cyber-border);
+        border-radius: 0.5rem;
+        padding: 0.85rem;
+        width: 100%;
+        font-size: 1rem;
+        color: var(--cyber-text-light); 
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      }
+      input[type="text"]:focus,
+      textarea:focus {
+        outline: none;
+        border-color: var(--cyber-neon-pink); 
+        box-shadow: 0 0 0 3px rgba(255, 0, 255, 0.3),
+          0 0 10px rgba(255, 0, 255, 0.5); 
+      }
+
+      .btn {
+        padding: 0.75rem 1.75rem;
+        border-radius: 0.5rem; 
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        transition: background-color 0.3s ease, transform 0.2s ease,
+          box-shadow 0.3s ease, color 0.3s ease;
+        cursor: pointer;
+        border: none;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+      }
+      .btn::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 300%;
+        height: 300%;
+        background: rgba(255, 255, 255, 0.1);
+        transition: all 0.75s ease-out;
+        transform: translate(-50%, -50%) rotate(45deg);
+        z-index: -1;
+        opacity: 0;
+      }
+      .btn:hover::before {
+        transform: translate(-50%, -50%) rotate(0deg);
+        opacity: 1;
+      }
+      .btn:active {
+        transform: translateY(0);
+        box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+      }
+
+      .btn-primary {
+        background-color: var(--cyber-neon-blue);
+        color: var(--cyber-darker);
+        box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+      }
+      .btn-primary:hover {
+        background-color: var(--cyber-neon-pink); 
+        color: var(--cyber-darker);
+        transform: translateY(-3px);
+        box-shadow: 0 0 20px rgba(255, 0, 255, 0.7);
+      }
+
+      .btn-edit {
+        background-color: var(--cyber-dark);
+        color: var(--cyber-neon-green);
+        border: 1px solid var(--cyber-neon-green);
+        box-shadow: 0 0 8px rgba(57, 255, 20, 0.4);
+        padding: 0.6rem 1.2rem;
+      }
+      .btn-edit:hover {
+        background-color: var(--cyber-neon-green);
+        color: var(--cyber-darker);
+        transform: translateY(-2px);
+        box-shadow: 0 0 12px rgba(57, 255, 20, 0.7);
+      }
+
+      .btn-delete {
+        background-color: var(--cyber-dark);
+        color: var(--cyber-neon-pink);
+        border: 1px solid var(--cyber-neon-pink);
+        box-shadow: 0 0 8px rgba(255, 0, 255, 0.4);
+        padding: 0.6rem 1.2rem;
+      }
+      .btn-delete:hover {
+        background-color: var(--cyber-neon-pink);
+        color: var(--cyber-darker);
+        transform: translateY(-2px);
+        box-shadow: 0 0 12px rgba(255, 0, 255, 0.7);
+      }
+
+      .btn-cancel {
+        background-color: var(--cyber-darker);
+        color: var(--cyber-text-medium); 
+        border: 1px solid var(--cyber-border);
+      }
+      .btn-cancel:hover {
+        background-color: var(--cyber-border);
+        color: var(--cyber-text-light);
+        transform: translateY(-2px);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+      }
+
+      table {
+        background-color: var(--cyber-darker);
+        border-radius: 0.75rem;
+        overflow: hidden;
+        border: 1px solid var(--cyber-border);
+      }
+      th,
+      td {
+        padding: 1.2rem 1.5rem;
+        text-align: left;
+        border-bottom: 1px solid var(--cyber-border);
+        color: var(--cyber-text-light); 
+      }
+      th {
+        background-color: rgba(
+          0,
+          240,
+          255,
+          0.1
+        ); 
+        font-weight: 700;
+        color: var(--cyber-neon-blue); 
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        letter-spacing: 0.08em; 
+        text-shadow: 0 0 5px rgba(0, 240, 255, 0.3);
+      }
+      tr:last-child td {
+        border-bottom: none;
+      }
+      tr:nth-child(even) {
+        background-color: rgba(0, 0, 0, 0.1); 
+      }
+      tr:hover {
+        background-color: rgba(0, 240, 255, 0.05); 
+        cursor: pointer;
+      }
+
+     
+      .profile-name-cell {
+        font-weight: 700; 
+        text-shadow: 0 0 5px rgba(0, 240, 255, 0.5); /* Subtle neon blue glow */
+      }
+
+      /* Style for description, created, and modified cells */
+      .profile-data-cell {
+        color: var(--cyber-text-light); /* Use pure white */
+        font-weight: 500; /* Slightly less bold than name, but still prominent */
+      }
+
+      /* Modal */
+      .modal {
+        background-color: rgba(0, 0, 0, 0.8); /* Darker, more opaque overlay */
+      }
+      .modal-content {
+        background-color: var(--cyber-dark);
+        border-radius: 1rem;
+        box-shadow: 0 0 30px rgba(255, 0, 255, 0.3),
+          0 0 60px rgba(0, 240, 255, 0.2); /* Combined glow */
+        border: 1px solid var(--cyber-neon-pink);
+        padding: 2.5rem;
+        max-width: 480px;
+        color: var(--cyber-text-light); /* Uses brighter light text color */
+      }
+      .modal-content h3 {
+        color: var(--cyber-neon-pink);
+        text-shadow: 0 0 8px rgba(255, 0, 255, 0.6);
+        margin-bottom: 1rem;
+      }
+      .modal-content p {
+        color: var(--cyber-text-medium); /* Uses brighter medium text color */
+      }
+
+      /* Navigation Bar */
+      .navbar {
+        background-color: var(--cyber-darker);
+        width: 100%;
+        padding: 1rem 2rem;
+        box-shadow: 0 5px 15px rgba(0, 240, 255, 0.1);
+        border-bottom: 1px solid var(--cyber-border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 999;
+      }
+      .navbar-brand {
+        color: var(--cyber-neon-blue);
+        font-size: 1.8rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-shadow: 0 0 8px rgba(0, 240, 255, 0.6);
+      }
+      .navbar-links a {
+        color: var(--cyber-text-medium); /* Uses brighter medium text color */
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        transition: color 0.3s ease, background-color 0.3s ease,
+          text-shadow 0.3s ease;
+      }
+      .navbar-links a:hover {
+        color: var(--cyber-neon-pink);
+        background-color: rgba(255, 0, 255, 0.1);
+        text-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
+      }
+      .navbar-links a.active {
+        color: var(--cyber-neon-blue);
+        background-color: rgba(0, 240, 255, 0.15);
+        text-shadow: 0 0 8px rgba(0, 240, 255, 0.8);
+        border: 1px solid var(--cyber-neon-blue);
+      }
+
+      /* Page sections */
+      .page-section {
+        display: none; /* Hidden by default */
+        animation: fade-in 0.5s ease-out;
+      }
+      .page-section.active {
+        display: block; /* Show active page */
+      }
+
+      @keyframes fade-in {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Dashboard specific styles */
+      .dashboard-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 400px; /* Adjust as needed for vertical centering */
+        padding: 2rem;
+      }
+
+      .dashboard-content h2 {
+        font-size: 3.5rem; /* Larger welcome text */
+        margin-bottom: 1rem;
+        color: var(--cyber-neon-green); /* Green for welcome */
+        text-shadow: 0 0 15px rgba(57, 255, 20, 0.8),
+          0 0 25px rgba(57, 255, 20, 0.5);
+      }
+
+      .dashboard-content p {
+        font-size: 1.5rem;
+        color: var(--cyber-text-medium);
+        max-width: 700px;
+        line-height: 1.8;
+      }
+
+      /* New styles for personal profile on dashboard */
+      .profile-image {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        border: 3px solid var(--cyber-neon-blue);
+        object-fit: cover;
+        box-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .profile-image:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 30px rgba(0, 240, 255, 0.8);
+      }
+      .profile-name {
+        color: var(--cyber-neon-green);
+        font-size: 2.5rem;
+        font-weight: 700;
+        text-shadow: 0 0 10px rgba(57, 255, 20, 0.7);
+        margin-top: 1rem;
+        letter-spacing: 0.03em;
+      }
+      .profile-description {
+        color: var(--cyber-text-medium); /* Uses brighter medium text color */
+        font-size: 1.1rem;
+        margin-top: 0.5rem;
+        line-height: 1.7;
+        max-width: 600px; /* Limit width for readability */
+      }
+      .text-shadow-neon {
+        text-shadow: 0 0 8px rgba(57, 255, 20, 0.6),
+          0 0 15px rgba(57, 255, 20, 0.4);
+      }
+
+      /* My Profile specific styles */
+      .profile-detail-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 0;
+        border-bottom: 1px dashed var(--cyber-border);
+      }
+      .profile-detail-item:last-child {
+        border-bottom: none;
+      }
+      .profile-detail-item label {
+        color: var(--cyber-text-medium); /* Uses brighter medium text color */
+        font-size: 1rem;
+        letter-spacing: 0.03em;
+      }
+      .profile-detail-item span {
+        color: var(--cyber-neon-blue);
+        font-family: "monospace", "Rajdhani", sans-serif;
+        font-size: 1.1rem;
+        text-shadow: 0 0 5px rgba(0, 240, 255, 0.3);
+        word-break: break-all; /* Ensure long IDs wrap */
+      }
+
+      /* Achievements List styles */
+      .achievements-list ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .achievements-list li {
+        background-color: var(--cyber-darker);
+        border: 1px solid var(--cyber-border);
+        border-radius: 0.5rem;
+        padding: 1rem 1.5rem;
+        margin-bottom: 0.75rem;
+        display: flex;
+        align-items: center;
+        color: var(--cyber-text-light);
+        box-shadow: 0 0 10px rgba(0, 240, 255, 0.05);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+      .achievements-list li:hover {
+        transform: translateX(5px);
+        box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+      }
+      .achievements-list li::before {
+        content: "»"; /* Cyberpunk-style bullet point */
+        color: var(--cyber-neon-green);
+        font-size: 1.5rem;
+        margin-right: 1rem;
+        font-weight: 700;
+        text-shadow: 0 0 5px rgba(57, 255, 20, 0.7);
+      }
+
+      /* Achievements Album styles */
+      .achievement-image-grid {
+        display: grid;
+        grid-template-columns: repeat(
+          auto-fit,
+          minmax(220px, 1fr)
+        ); /* Adjusted minmax for larger images */
+        gap: 2rem; /* Increased gap for better spacing */
+        margin-top: 2rem;
+        max-width: 800px; /* Limit width of the grid */
+        margin-left: auto; /* Center the grid container */
+        margin-right: auto; /* Center the grid container */
+        justify-content: center; /* Center the grid tracks when there's extra space */
+      }
+      .achievement-image-wrapper {
+        background-color: var(--cyber-darker);
+        border: 1px solid var(--cyber-border);
+        border-radius: 0.75rem;
+        overflow: hidden;
+        box-shadow: 0 0 15px rgba(255, 0, 255, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease,
+          border-color 0.3s ease; /* Added border-color to transition */
+        position: relative;
+        padding: 1rem; /* Increased padding inside the wrapper */
+      }
+      .achievement-image-wrapper:hover {
+        transform: scale(1.05); /* Slightly more pronounced scale */
+        box-shadow: 0 0 30px rgba(255, 0, 255, 0.6),
+          0 0 40px rgba(0, 240, 255, 0.3); /* More vibrant glow */
+        border-color: var(--cyber-neon-pink); /* Highlight border on hover */
+      }
+      .achievement-image {
+        width: 220px; /* Set fixed width */
+        height: 220px; /* Set fixed height to match width */
+        object-fit: cover; /* Cover the area, crop if necessary */
+        border-radius: 0; /* Make it perfectly square */
+        border: 1px solid var(--cyber-neon-blue); /* Blue border for images */
+      }
+      .achievement-image-caption {
+        color: var(--cyber-text-light);
+        font-size: 1rem; /* Slightly larger font size */
+        margin-top: 1rem; /* Increased margin top */
+        font-weight: 500;
+        text-align: center;
+        padding: 0 0.5rem;
+        text-shadow: 0 0 5px rgba(0, 240, 255, 0.2); /* Subtle text glow */
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="navbar-brand">MY PROFILE</div>
+      <div class="navbar-links space-x-6">
+        <a href="#dashboard" class="nav-link active" data-page="dashboard-page"
+          >Dashboard</a
+        >
+        <a
+          href="#manage-profiles"
+          class="nav-link"
+          data-page="manage-profiles-page"
+          >Kelola Profil</a
+        >
+        <a href="#about-me-page" class="nav-link" data-page="about-me-page"
+          >Tentang Saya</a
+        >
+      </div>
+    </nav>
+
+    <div class="main-container">
+      <div id="dashboard-page" class="page-section active">
+        <div class="p-6 card text-center dashboard-content">
+          <h2 class="text-center">Selamat Datang di PROFILES!</h2>
+          <p class="text-center mt-4">
+            Jelajahi profil, kelola data Anda, dan temukan informasi menarik.
+          </p>
+        </div>
+      </div>
+
+      <div id="manage-profiles-page" class="page-section">
+        <div class="p-6 card mb-8">
+          <h2 id="formTitle" class="text-2xl font-semibold mb-6">
+            Tambah Profil Baru
+          </h2>
+          <form id="profileForm" class="space-y-4">
+            <div>
+              <label for="profileName" class="block text-sm font-bold mb-2"
+                >Nama:</label
+              >
+              <input
+                type="text"
+                id="profileName"
+                name="name"
+                placeholder="Masukkan nama profil"
+                required
+              />
+            </div>
+            <div>
+              <label
+                for="profileDescription"
+                class="block text-sm font-bold mb-2"
+                >Deskripsi:</label
+              >
+              <textarea
+                id="profileDescription"
+                name="description"
+                rows="4"
+                placeholder="Masukkan deskripsi profil"
+                required
+              ></textarea>
+            </div>
+            <div class="flex justify-end space-x-4">
+              <button type="submit" class="btn btn-primary" id="submitButton">
+                Tambah Profil
+              </button>
+              <button
+                type="button"
+                class="btn btn-cancel hidden"
+                id="cancelEditButton"
+              >
+                Batal
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div class="p-6 card">
+          <h2 class="text-2xl font-semibold mb-6">Daftar Profil</h2>
+          <div class="overflow-x-auto">
+            <table class="min-w-full">
+              <thead>
+                <tr>
+                  <th>Nama</th>
+                  <th>Deskripsi</th>
+                  <th>Dibuat</th>
+                  <th>Diubah</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="profilesTableBody">
+                <tr>
+                  <td colspan="5" class="text-center py-4 text-gray-500">
+                    Memuat profil...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div id="about-me-page" class="page-section">
+        <div class="p-6 card text-center">
+          <h2 class="text-center">Tentang Saya</h2>
+          <p class="text-center text-lg text-gray-400 mb-8">
+            Informasi pribadi dan profesional.
+          </p>
+
+          <div class="flex flex-col items-center justify-center space-y-4 mb-8">
+            <img src="images/fotoprofile.png"
+            alt="fotoprofile">
+            <h3 class="profile-name">Akhmad Syaifudin</h3>
+            <p class="profile-description">
+              Fokus mempelajari teknologi blockchain, smart contract, dan
+              strategi trading modern. Dengan semangat eksplorasi dan riset,
+              saya berharap dapat ikut andil membangun ekosistem digital yang
+              lebih transparan dan inovatif.
+            </p>
+          </div>
+
+          <div class="text-left mt-8 space-y-4 max-w-xl mx-auto">
+            <p class="text-lg text-white">
+              <span class="font-bold text-cyber-neon-blue">Visi:</span>
+              Membangun ekosistem digital yang lebih transparan dan inovatif.
+            </p>
+            <p class="text-lg text-white">
+              <span class="font-bold text-cyber-neon-blue">Fokus Studi:</span>
+              Teknologi blockchain, smart contract, dan strategi trading modern.
+            </p>
+            <p class="text-lg text-white">
+              <span class="font-bold text-cyber-neon-blue">Semangat:</span>
+              Eksplorasi dan riset berkelanjutan.
+            </p>
+          </div>
+
+          <div class="achievements-section mt-12">
+            <h2 class="text-center mb-6">Prestasi</h2>
+            <div class="achievements-list">
+              <ul>
+                <li>
+                  Prestasi lomba tarung derajat tingkat Pekan Olahraga Mahasiswa
+                  Provinsi Jateng kategori kelas tarung bb 64 - 67kg juara 3
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div
+            class="achievements-album-section mt-12 text-center max-w-4xl mx-auto"
+          >
+            <h2 class="text-center mb-6">Album Prestasi</h2>
+            <div class="achievement-image-grid">
+              <div class="achievement-image-wrapper">
+                <img
+                  src="images/prestasi1.png"
+                  alt="prestasi1"
+                  class="achievement-image"
+                  onerror="this.onerror=null;this.src='https://placehold.co/400x300/1a1a2e/ff0000?text=ERROR';"
+                />
+              </div>
+              <div class="achievement-image-wrapper">
+                <img
+                  src="images/prestasi2.png"
+                  alt="prestasi2"
+                  class="achievement-image"
+                  onerror="this.onerror=null;this.src='https://placehold.co/400x300/1a1a2e/ff0000?text=ERROR';"
+                />
+              </div>
+              <div class="achievement-image-wrapper">
+                <img
+                  src="images/prestasi3.png"
+                  alt="prestasi3"
+                  class="achievement-image"
+                  onerror="this.onerror=null;this.src='https://placehold.co/400x300/1a1a2e/ff0000?text=ERROR';"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="deleteConfirmationModal"
+      class="modal fixed inset-0 flex items-center justify-center z-50 hidden"
+    >
+      <div class="modal-content text-center">
+        <h3 class="text-xl font-bold mb-4">Konfirmasi Hapus</h3>
+        <p class="mb-6">Apakah Anda yakin ingin menghapus profil ini?</p>
+        <div class="flex justify-center space-x-4">
+          <button id="confirmDeleteButton" class="btn btn-delete">Hapus</button>
+          <button id="cancelDeleteButton" class="btn btn-cancel">Batal</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      console.log("JavaScript is running!");
+
+      const API_BASE_URL = "http://localhost:3000/api/profiles";
+
+      let editingProfileId = null; // Untuk menyimpan ID profil yang sedang diedit
+      let profileToDeleteId = null; // Untuk menyimpan ID profil yang akan dihapus
+
+      // Deklarasikan variabel untuk elemen DOM secara global
+      let profileForm;
+      let profileNameInput;
+      let profileDescriptionInput;
+      let profilesTableBody;
+      let formTitle;
+      let submitButton;
+      let cancelEditButton;
+
+      let deleteConfirmationModal;
+      let confirmDeleteButton;
+      let cancelDeleteButton;
+
+      // Fungsi untuk menampilkan halaman tertentu dan menyembunyikan yang lain
+      const showPage = (pageId) => {
+        document.querySelectorAll(".page-section").forEach((section) => {
+          section.classList.remove("active");
+        });
+        document.getElementById(pageId).classList.add("active");
+
+        // Perbarui tautan aktif di bilah navigasi
+        document.querySelectorAll(".nav-link").forEach((link) => {
+          link.classList.remove("active");
+          if (link.dataset.page === pageId) {
+            link.classList.add("active");
+          }
+        });
+      };
+
+      // Fungsi untuk mengambil dan menampilkan profil dari backend
+      const fetchAndDisplayProfiles = async () => {
+        profilesTableBody.innerHTML = `<tr><td colspan="5" class="text-center py-4 text-gray-500">Memuat profil...</td></tr>`;
+        try {
+          const response = await fetch(API_BASE_URL);
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          const profiles = await response.json();
+          displayProfiles(profiles);
+        } catch (error) {
+          console.error("Kesalahan saat mengambil profil:", error);
+          profilesTableBody.innerHTML = `<tr><td colspan="5" class="text-center py-4 text-red-500">Gagal memuat profil: ${error.message}</td></tr>`;
+        }
+      };
+
+      // Fungsi untuk mengisi formulir untuk mengedit
+      const editProfile = async (id) => {
+        // Beralih ke halaman kelola profil saat mengedit
+        showPage("manage-profiles-page");
+
+        try {
+          const response = await fetch(`${API_BASE_URL}/${id}`);
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          const profileData = await response.json();
+          // Asumsi backend mengembalikan array, ambil elemen pertama
+          if (profileData && profileData.length > 0) {
+            profileNameInput.value = profileData[0].name;
+            profileDescriptionInput.value = profileData[0].description;
+            editingProfileId = id;
+            formTitle.textContent = "Edit Profil";
+            submitButton.textContent = "Perbarui Profil";
+            cancelEditButton.classList.remove("hidden"); // Tampilkan tombol batal
+          } else {
+            console.error("Profil tidak ditemukan!");
+          }
+        } catch (error) {
+          console.error("Kesalahan saat mengambil profil untuk diedit:", error);
+        }
+      };
+
+      // Tampilkan modal konfirmasi hapus
+      const showDeleteConfirmation = (id) => {
+        profileToDeleteId = id;
+        deleteConfirmationModal.classList.remove("hidden");
+      };
+
+      // Inisialisasi aplikasi dan atur event listener
+      const initializeApp = () => {
+        // Tetapkan elemen DOM di sini, pastikan tersedia
+        profileForm = document.getElementById("profileForm");
+        profileNameInput = document.getElementById("profileName");
+        profileDescriptionInput = document.getElementById("profileDescription");
+        profilesTableBody = document.getElementById("profilesTableBody");
+        formTitle = document.getElementById("formTitle");
+        submitButton = document.getElementById("submitButton");
+        cancelEditButton = document.getElementById("cancelEditButton");
+
+        deleteConfirmationModal = document.getElementById(
+          "deleteConfirmationModal"
+        );
+        confirmDeleteButton = document.getElementById("confirmDeleteButton");
+        cancelDeleteButton = document.getElementById("cancelDeleteButton");
+
+        // Tambahkan event listener di sini setelah elemen ditetapkan
+        profileForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const name = profileNameInput.value.trim();
+          const description = profileDescriptionInput.value.trim();
+
+          if (!name || !description) {
+            console.error("Nama dan Deskripsi tidak boleh kosong.");
+            return;
+          }
+
+          try {
+            let response;
+            if (editingProfileId) {
+              // Perbarui profil yang ada
+              response = await fetch(`${API_BASE_URL}/${editingProfileId}`, {
+                method: "PUT",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ name, description }),
+              });
+              console.log("Profil berhasil diperbarui!");
+            } else {
+              // Tambah profil baru
+              response = await fetch(API_BASE_URL, {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ name, description }),
+              });
+              console.log("Profil berhasil ditambahkan!");
+            }
+
+            if (!response.ok) {
+              const errorData = await response.json();
+              throw new Error(
+                errorData.message || `HTTP error! status: ${response.status}`
+              );
+            }
+
+            profileForm.reset(); // Kosongkan formulir
+            editingProfileId = null;
+            formTitle.textContent = "Tambah Profil Baru";
+            submitButton.textContent = "Tambah Profil";
+            cancelEditButton.classList.add("hidden"); // Sembunyikan tombol batal
+            fetchAndDisplayProfiles(); // Muat ulang daftar profil
+          } catch (error) {
+            console.error("Kesalahan saat menyimpan profil:", error);
+            // Tampilkan pesan kesalahan kepada pengguna jika perlu
+          }
+        });
+
+        cancelEditButton.addEventListener("click", () => {
+          profileForm.reset();
+          editingProfileId = null;
+          formTitle.textContent = "Tambah Profil Baru";
+          submitButton.textContent = "Tambah Profil";
+          cancelEditButton.classList.add("hidden");
+        });
+
+        cancelDeleteButton.addEventListener("click", () => {
+          deleteConfirmationModal.classList.add("hidden");
+          profileToDeleteId = null;
+        });
+
+        confirmDeleteButton.addEventListener("click", async () => {
+          if (!profileToDeleteId) {
+            console.error("ID profil untuk dihapus belum siap.");
+            return;
+          }
+
+          try {
+            const response = await fetch(
+              `${API_BASE_URL}/${profileToDeleteId}`,
+              {
+                method: "DELETE",
+              }
+            );
+
+            if (!response.ok) {
+              const errorData = await response.json();
+              throw new Error(
+                errorData.message || `HTTP error! status: ${response.status}`
+              );
+            }
+
+            console.log("Profil berhasil dihapus!");
+            deleteConfirmationModal.classList.add("hidden");
+            profileToDeleteId = null;
+            fetchAndDisplayProfiles(); // Muat ulang daftar profil
+          } catch (error) {
+            console.error("Kesalahan saat menghapus profil:", error);
+            deleteConfirmationModal.classList.add("hidden");
+            profileToDeleteId = null;
+            // Tampilkan pesan kesalahan kepada pengguna jika perlu
+          }
+        });
+
+        document.querySelectorAll(".nav-link").forEach((link) => {
+          link.addEventListener("click", (e) => {
+            e.preventDefault();
+            showPage(e.target.dataset.page);
+            // Jika beralih ke halaman kelola profil, muat ulang data
+            if (e.target.dataset.page === "manage-profiles-page") {
+              fetchAndDisplayProfiles();
+            }
+          });
+        });
+
+        // Tampilkan dashboard secara default saat memuat
+        showPage("dashboard-page");
+        // Untuk memastikan data profil dimuat saat pertama kali masuk ke halaman kelola profil
+        // Anda bisa memanggil fetchAndDisplayProfiles() di sini jika ingin tabel terisi saat aplikasi dimuat pertama kali
+        // atau hanya ketika pengguna mengklik "Kelola Profil"
+      };
+
+      // Fungsi untuk menampilkan profil di tabel
+      const displayProfiles = (profiles) => {
+        profilesTableBody.innerHTML = ""; // Hapus baris yang ada
+
+        if (profiles.length === 0) {
+          profilesTableBody.innerHTML = `<tr><td colspan="5" class="text-center py-4 text-gray-500">Belum ada profil. Tambahkan yang baru!</td></tr>`;
+          return;
+        }
+
+        // Urutkan profil berdasarkan createdAt dalam urutan menurun (terbaru dulu)
+        profiles.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+        profiles.forEach((profile) => {
+          const row = document.createElement("tr");
+          // Format tanggal dan waktu
+          const createdAtFormatted = profile.createdAt
+            ? new Date(profile.createdAt).toLocaleString()
+            : "N/A";
+          const modifiedAtFormatted = profile.modifiedAt
+            ? new Date(profile.modifiedAt).toLocaleString()
+            : "N/A";
+
+          row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap text-sm profile-name-cell">${profile.name}</td>
+                    <td class="px-6 py-4 whitespace-pre-wrap text-sm profile-data-cell">${profile.description}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm profile-data-cell">${createdAtFormatted}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm profile-data-cell">${modifiedAtFormatted}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                        <button data-id="${profile.id}" class="btn btn-edit mr-2">Edit</button>
+                        <button data-id="${profile.id}" class="btn btn-delete">Hapus</button>
+                    </td>
+                `;
+          profilesTableBody.appendChild(row);
+        });
+
+        // Tambahkan event listener ke tombol Edit dan Hapus yang baru
+        document.querySelectorAll(".btn-edit").forEach((button) => {
+          button.addEventListener("click", (e) =>
+            editProfile(e.target.dataset.id)
+          );
+        });
+        document.querySelectorAll(".btn-delete").forEach((button) => {
+          button.addEventListener("click", (e) =>
+            showDeleteConfirmation(e.target.dataset.id)
+          );
+        });
+      };
+
+      // Inisialisasi aplikasi saat jendela dimuat
+      window.onload = initializeApp;
+    </script>
+  </body>
+</html>
